@@ -1121,7 +1121,11 @@ define([
             } else if (equivalentEvent) {
                 element.removeEventListener(equivalentEvent, listener, useCapture);
             } else {
-                element.removeEventListener(type, listener, useCapture);
+                if (typeof(listener) === 'undefined') {
+                    // Do nothing. Workaround for https://github.com/winjs/winjs/issues/1665
+                } else {
+                    element.removeEventListener(type, listener, useCapture);
+                }
             }
         },
 
